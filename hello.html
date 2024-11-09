@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .assignment {
+            margin-bottom: 10px;
+        }
+        .assignment input {
+            margin-right: 10px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grade Calculator</h1>
+        <div id="assignments">
+            <div class="assignment">
+                <input type="text" placeholder="Assignment Name">
+                <input type="number" placeholder="Grade (%)">
+                <input type="number" placeholder="Weight (%)">
+            </div>
+        </div>
+        <button onclick="addAssignment()">Add Assignment</button>
+        <button onclick="calculateGrade()">Calculate Grade</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function addAssignment() {
+            const assignmentsDiv = document.getElementById('assignments');
+            const newAssignment = document.createElement('div');
+            newAssignment.className = 'assignment';
+            newAssignment.innerHTML = `
+                <input type="text" placeholder="Assignment Name">
+                <input type="number" placeholder="Grade (%)">
+                <input type="number" placeholder="Weight (%)">
+            `;
+            assignmentsDiv.appendChild(newAssignment);
+        }
+
+        function calculateGrade() {
+            const assignments = document.querySelectorAll('.assignment');
+            let totalGrade = 0;
+            let totalWeight = 0;
+
+            assignments.forEach(assignment => {
+                const grade = parseFloat(assignment.children[1].value);
+                const weight = parseFloat(assignment.children[2].value);
+
+                if (!isNaN(grade) && !isNaN(weight)) {
+                    totalGrade += grade * (weight / 100);
+                    totalWeight += weight;
+                }
+            });
+
+            const resultDiv = document.getElementById('result');
+            if (totalWeight === 100) {
+                resultDiv.textContent = `Your final grade is: ${totalGrade.toFixed(2)}%`;
+            } else {
+                resultDiv.textContent = 'The total weight of all assignments must equal 100%.';
+            }
+        }
+    </script>
+</body>
+</html>
