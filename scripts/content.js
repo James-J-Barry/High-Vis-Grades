@@ -6,6 +6,7 @@ function extractAssignmentsAndGrades(assignments) {
     const rows = document.querySelectorAll('tr');
 
     rows.forEach(row => {
+        const assignmentName = row.querySelector('a')?.textContent.trim();
         const gradeText = row.querySelector('div.submissionStatus--score')?.textContent.trim();
         const type = row.querySelector('select')?.selectedOptions[0]?.value;
         
@@ -13,10 +14,10 @@ function extractAssignmentsAndGrades(assignments) {
             // Extract the numeric grades from the text
             const [numerator, denominator] = gradeText.split(' / ').map(parseFloat);
             const percentage = (numerator / denominator) * 100;
-            assignments.get(type).push({ grade: percentage });
+            assignments.get(type).push({ name: assignmentName, grade: percentage });
         }
     });
-    // Log assignments to the console
+    
     return assignments;
 }
 
@@ -54,6 +55,7 @@ function main() {
 
     var assignmentTypes = new Map();
 
+    // Add a dropdown menu for each assignment to select its type
     rows.forEach(row => {
         const typeSelector = document.createElement('select');
         const assig = row.querySelector("a");
@@ -71,12 +73,14 @@ function main() {
     });
 
     
+    // Create a display element for the course grade
     const gradeDisplay = document.createElement("p");
     // Use the same styling as the publish information in an article's header
     gradeDisplay.classList.add("color-secondary-text", "type--caption");
     gradeDisplay.textContent = "Course Grade: 0%";
 
 
+    // Create a button to add new assignment types
     const newTypeButton = document.createElement('button');
     newTypeButton.textContent = 'Add New Assignment Type';
 
@@ -91,12 +95,17 @@ function main() {
             assignments.set(assignmentTypeName, []);
 
             rows.forEach(row => {
+                const assignmentName = row.querySelector('a')?.textContent.trim();
                 const typeSelector = row.querySelector('select');
                 if (typeSelector) {
                     const option = document.createElement('option');
                     option.value = assignmentTypeName;
                     option.textContent = assignmentTypeName;
                     typeSelector.appendChild(option);
+
+                    if (assignmentName.toLowerCase().includes(assignmentTypeName.toLowerCase())) {
+                        typeSelector.value = assignmentTypeName;
+                    }
                 }
             });
 
@@ -107,6 +116,7 @@ function main() {
 
     
 
+    // Create a button to calculate the course grade
     const calculateButton = document.createElement('button');
     calculateButton.textContent = 'Calculate Course Grade';
     calculateButton.addEventListener('click', () => {
@@ -118,13 +128,8 @@ function main() {
         gradeDisplay.textContent = `Course Grade: ${courseGrade.toFixed(2)}%`;
     });
 
+    // Display the buttons and grade on the page
     const heading = document.querySelector("div.courseHeader--courseID");
-    // Append the dropdown menu to the document body or a specific element
-
-    
-
-    // Support for API reference docs
-    
 
     (heading).insertAdjacentElement("afterend", gradeDisplay);
 
