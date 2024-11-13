@@ -4,7 +4,8 @@
   "version": "1.0",
   "description": "Fetches and calculates course grades from Gradescope.",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "content_scripts": [
     {
