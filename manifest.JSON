@@ -1,8 +1,18 @@
 {
-  "name": "Gradescope Plus",
-  "description": "Base Level Extension",
-  "version": "1.0",
   "manifest_version": 3,
+  "name": "GradescopePlusr",
+  "version": "1.0",
+  "description": "Fetches and calculates course grades from Gradescope.",
+  "permissions": [
+    "https://www.gradescope.com/*",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.gradescope.com/*"],
+      "js": ["content.js"]
+    }
+  ],
   "action": {
     "default_popup": "hello.html",
     "default_icon": "lovestick.png"
