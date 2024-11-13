@@ -75,24 +75,36 @@ function main() {
     
     // Create a display element for the course grade
     const gradeDisplay = document.createElement("p");
-    // Use the same styling as the publish information in an article's header
-    gradeDisplay.classList.add("color-secondary-text", "type--caption");
     gradeDisplay.textContent = "Course Grade: 0%";
 
 
     // Create a button to add new assignment types
     const newTypeButton = document.createElement('button');
-    newTypeButton.textContent = 'Add New Assignment Type';
+    newTypeButton.textContent = 'Add';
+    newTypeButton.style.display = 'block';
+    newTypeButton.style.marginLeft = '8px';
+    newTypeButton.style.marginRight = '8px';
+    newTypeButton.style.backgroundColor = '#007bff';
+    newTypeButton.style.color = '#fff';
+    newTypeButton.style.backgroundColor = '#82aef5';
+    newTypeButton.style.border = 'none';
+    newTypeButton.style.padding = '5px';
+    newTypeButton.style.borderRadius = '5px';
+    newTypeButton.style.cursor = 'pointer';
 
     newTypeButton.addEventListener('click', () => {
-        const assignmentTypeName = prompt('Type name:');
-        const percentage = parseFloat(prompt('Enter percent of grade:'));
+        const assignmentTypeName = assignmentTypeInput.value.trim();
+        const percentage = parseFloat(assignmentPercentageInput.value);
+        assignmentTypeInput.value = '';
+        assignmentPercentageInput.value = '';
 
         if (assignmentTypeName && !isNaN(percentage)) {
 
             console.log(`New assignment type: ${assignmentTypeName}, Percentage: ${percentage}`);
             assignmentTypes.set(assignmentTypeName, percentage);
             assignments.set(assignmentTypeName, []);
+
+            updateAssignmentTypesDisplay();
 
             rows.forEach(row => {
                 const assignmentName = row.querySelector('a')?.textContent.trim();
@@ -119,6 +131,15 @@ function main() {
     // Create a button to calculate the course grade
     const calculateButton = document.createElement('button');
     calculateButton.textContent = 'Calculate Course Grade';
+    calculateButton.style.display = 'block';
+    calculateButton.style.marginBottom = '8px';
+    calculateButton.style.backgroundColor = '#007bff';
+    calculateButton.style.color = '#fff';
+    calculateButton.style.backgroundColor = '#82aef5';
+    calculateButton.style.border = 'none';
+    calculateButton.style.padding = '10px 20px';
+    calculateButton.style.borderRadius = '5px';
+    calculateButton.style.cursor = 'pointer';
     calculateButton.addEventListener('click', () => {
 
         assignments = extractAssignmentsAndGrades(assignments);
@@ -128,14 +149,99 @@ function main() {
         gradeDisplay.textContent = `Course Grade: ${courseGrade.toFixed(2)}%`;
     });
 
-    // Display the buttons and grade on the page
+    // Create a display element for assignment types and their weights
+    const assignmentTypesDisplay = document.createElement("ul");
+    assignmentTypesDisplay.style.listStyleType = 'none';
+    assignmentTypesDisplay.style.padding = '5';
+    assignmentTypesDisplay.style.marginBottom = '10px';
+
+    // Function to update the assignment types display
+    function updateAssignmentTypesDisplay() {
+        assignmentTypesDisplay.innerHTML = ''; // Clear the list
+        assignmentTypes.forEach((weight, type) => {
+            if (type !== "Select Assignment Type") {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${type}: ${weight}%`;
+                assignmentTypesDisplay.appendChild(listItem);
+            }
+        });
+    }
+
+    // Create a container div for the inputs
+    const inputContainer = document.createElement('div');
+    inputContainer.style.display = 'flex';
+    inputContainer.style.alignItems = 'center';
+    inputContainer.style.marginBottom = '10px';
+    inputContainer.style.width = 'auto'; // Set a fixed width for the container
+
+    // Create a text node for the label
+    const labelText1 = document.createTextNode('Add new assignment type: ');
+    const labelText2 = document.createTextNode(' that makes up  ');
+    const labelText3 = document.createTextNode(' of the total grade');
+
+    // Create a text input for the assignment type
+    const assignmentTypeInput = document.createElement('input');
+    assignmentTypeInput.type = 'text';
+    assignmentTypeInput.placeholder = 'Type name';
+    assignmentTypeInput.style.width = '120px'; // Set a specific width
+    assignmentTypeInput.style.marginRight = '8px';
+    assignmentTypeInput.style.marginLeft = '8px';
+    assignmentTypeInput.style.padding = '5px';
+    assignmentTypeInput.style.border = '1px solid #ccc';
+    assignmentTypeInput.style.borderRadius = '5px';
+    assignmentTypeInput.style.flexShrink = '0'; // Prevent stretching
+
+    // Create a text input for the percentage of total grade for an assignment type
+    const assignmentPercentageInput = document.createElement('input');
+    assignmentPercentageInput.type = 'number';
+    assignmentPercentageInput.placeholder = 'Percentage';
+    assignmentPercentageInput.style.width = '100px';
+    assignmentPercentageInput.style.marginRight = '8px';
+    assignmentPercentageInput.style.marginLeft = '8px';
+    assignmentPercentageInput.style.padding = '5px';
+    assignmentPercentageInput.style.border = '1px solid #ccc';
+    assignmentPercentageInput.style.borderRadius = '5px';
+    assignmentPercentageInput.style.flexShrink = '0'; // Prevent stretching
+
+    // Append the text nodes and inputs to the container
+    inputContainer.appendChild(labelText1);
+    inputContainer.appendChild(assignmentTypeInput);
+    inputContainer.appendChild(labelText2);
+    inputContainer.appendChild(assignmentPercentageInput);
+    inputContainer.appendChild(labelText3);
+    inputContainer.appendChild(newTypeButton);
+    
+
+    // Initial update of the assignment types display
+    updateAssignmentTypesDisplay();
+
+    // Create a container div for the panel
+    const panel = document.createElement('div');
+    panel.style.border = '1px solid #ccc';
+    panel.style.padding = '10px';
+    panel.style.marginTop = '10px';
+    panel.style.backgroundColor = '#f9f9f9';
+    panel.style.borderRadius = '5px';
+    panel.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+
+    gradeDisplay.style.display = 'block';
+    gradeDisplay.style.marginBottom = '10px';
+
+    newTypeButton.style.display = 'block';
+    newTypeButton.style.marginBottom = '10px';
+
+    calculateButton.style.display = 'block';
+    calculateButton.style.marginBottom = '10px';
+
+    // Append the elements to the panel
+    panel.appendChild(gradeDisplay);
+    panel.appendChild(assignmentTypesDisplay);
+    panel.appendChild(inputContainer);
+    panel.appendChild(calculateButton);
+
+    // Insert the panel after the heading
     const heading = document.querySelector("div.courseHeader--courseID");
-
-    (heading).insertAdjacentElement("afterend", gradeDisplay);
-
-    (heading).insertAdjacentElement("afterend", newTypeButton);
-
-    (heading).insertAdjacentElement("afterend", calculateButton);
+    heading.insertAdjacentElement("afterend", panel);
 } 
 
 // Run the main function
