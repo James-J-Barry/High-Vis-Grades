@@ -68,7 +68,19 @@ function main() {
             assignments.set("Select Assignment Type", []);
 
             typeSelector.appendChild(option);
-            (assig).insertAdjacentElement("afterend", typeSelector);
+
+            // Style the typeSelector
+            typeSelector.style.display = 'block';
+            typeSelector.style.marginTop = '8px';
+            typeSelector.style.marginBottom = '8px';
+            typeSelector.style.width = '175px';
+            typeSelector.style.padding = '5px';
+            typeSelector.style.border = '1px solid #ccc';
+            typeSelector.style.borderRadius = '5px';
+            typeSelector.style.flexShrink = '0';
+
+            // Insert the typeSelector below the assignment name
+            assig.insertAdjacentElement("afterend", typeSelector);
         }
     });
 
@@ -85,8 +97,8 @@ function main() {
     newTypeButton.style.marginLeft = '8px';
     newTypeButton.style.marginRight = '8px';
     newTypeButton.style.backgroundColor = '#007bff';
-    newTypeButton.style.color = '#fff';
-    newTypeButton.style.backgroundColor = '#82aef5';
+    newTypeButton.style.color = '#191919';
+    newTypeButton.style.backgroundColor = '#cceaff';
     newTypeButton.style.border = 'none';
     newTypeButton.style.padding = '5px';
     newTypeButton.style.borderRadius = '5px';
@@ -134,8 +146,8 @@ function main() {
     calculateButton.style.display = 'block';
     calculateButton.style.marginBottom = '8px';
     calculateButton.style.backgroundColor = '#007bff';
-    calculateButton.style.color = '#fff';
-    calculateButton.style.backgroundColor = '#82aef5';
+    calculateButton.style.color = '#191919';
+    calculateButton.style.backgroundColor = '#cceaff';
     calculateButton.style.border = 'none';
     calculateButton.style.padding = '10px 20px';
     calculateButton.style.borderRadius = '5px';
@@ -150,19 +162,53 @@ function main() {
     });
 
     // Create a display element for assignment types and their weights
-    const assignmentTypesDisplay = document.createElement("ul");
-    assignmentTypesDisplay.style.listStyleType = 'none';
-    assignmentTypesDisplay.style.padding = '5';
-    assignmentTypesDisplay.style.marginBottom = '10px';
+    const assignmentTypesTable = document.createElement("table");
+    assignmentTypesTable.style.width = '350px';
+    assignmentTypesTable.style.borderCollapse = 'collapse';
+    assignmentTypesTable.style.marginBottom = '10px';
+    assignmentTypesTable.style.flexShrink = '0'; // Prevent stretching
+
+    // Create table headers
+    const headerRow = document.createElement('tr');
+    const headerType = document.createElement('th');
+    headerType.textContent = 'Assignment Type';
+    headerType.style.border = '1px solid #ccc';
+    headerType.style.padding = '8px';
+    headerType.style.backgroundColor = '#f2f2f2';
+
+    const headerWeight = document.createElement('th');
+    headerWeight.textContent = 'Weight (%)';
+    headerWeight.style.border = '1px solid #ccc';
+    headerWeight.style.padding = '8px';
+    headerWeight.style.backgroundColor = '#f2f2f2';
+
+    headerRow.appendChild(headerType);
+    headerRow.appendChild(headerWeight);
+    assignmentTypesTable.appendChild(headerRow);
 
     // Function to update the assignment types display
     function updateAssignmentTypesDisplay() {
-        assignmentTypesDisplay.innerHTML = ''; // Clear the list
+        // Clear the table rows except for the header
+        assignmentTypesTable.innerHTML = '';
+        assignmentTypesTable.appendChild(headerRow);
+
         assignmentTypes.forEach((weight, type) => {
             if (type !== "Select Assignment Type") {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${type}: ${weight}%`;
-                assignmentTypesDisplay.appendChild(listItem);
+                const row = document.createElement('tr');
+
+                const typeCell = document.createElement('td');
+                typeCell.textContent = type;
+                typeCell.style.border = '1px solid #ccc';
+                typeCell.style.padding = '8px';
+
+                const weightCell = document.createElement('td');
+                weightCell.textContent = weight;
+                weightCell.style.border = '1px solid #ccc';
+                weightCell.style.padding = '8px';
+
+                row.appendChild(typeCell);
+                row.appendChild(weightCell);
+                assignmentTypesTable.appendChild(row);
             }
         });
     }
@@ -235,9 +281,10 @@ function main() {
 
     // Append the elements to the panel
     panel.appendChild(gradeDisplay);
-    panel.appendChild(assignmentTypesDisplay);
+    panel.appendChild(assignmentTypesTable);
     panel.appendChild(inputContainer);
     panel.appendChild(calculateButton);
+    
 
     // Insert the panel after the heading
     const heading = document.querySelector("div.courseHeader--courseID");
