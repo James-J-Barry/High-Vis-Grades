@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "GradescopePlus",
-  "version": "1.0",
+  "name": "High-Vis Grades for Gradescope",
+  "version": "0.0.0.1",
   "description": "Fetches and calculates course grades from Gradescope.",
   "permissions": [
     "activeTab",
@@ -13,12 +13,10 @@
       "js": ["scripts/content.js"]
     }
   ],
-  "action": {
-    "default_popup": "hello.html",
-    "default_icon": {
-      "16": "lovestick.png",
-      "48": "lovestick.png",
-      "128": "lovestick.png"
-    }
+  "icons": {
+    "16": "images/Scope16.png",
+    "32": "images/Scope32.png",
+    "48": "images/Scope48.png",
+    "128": "images/Scope128.png"
   }
 }

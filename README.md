@@ -15,7 +15,6 @@ GradescopePlus is a browser extension that calculates a studnet's course grade f
 
 ## To-do
 ~~Figure out how to gather information from Gradescope HTML~~
-- display all current assignment types and their weights on the page
-- have all of the buttons and info currently stuffed at the top of the page be in a nice panel
+~~ have all of the buttons and info currently stuffed at the top of the page be in a nice panel~~
 - 
 
