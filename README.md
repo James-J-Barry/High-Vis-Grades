@@ -1,4 +1,4 @@
-# GradescopePlus
+# High-Vis Grades for Gradescope
 
 ## Description
 High-Vis Grades is NOT produced by or officially affiliated with Gradescope or Turnitin in any way.
