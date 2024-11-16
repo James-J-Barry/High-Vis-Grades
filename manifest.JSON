@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "High-Vis Grades for Gradescope",
   "version": "0.0.0.1",
-  "description": "Fetches and calculates course grades from Gradescope.",
+  "description": "Accurately calculates and displays the overall course grade for a course on Gradescope",
   "permissions": [
     "activeTab",
     "scripting"
