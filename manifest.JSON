@@ -1,10 +1,22 @@
 {
-  "name": "Gradescope Plus",
-  "description": "Base Level Extension",
-  "version": "1.0",
   "manifest_version": 3,
-  "action": {
-    "default_popup": "hello.html",
-    "default_icon": "lovestick.png"
+  "name": "High-Vis Grades for Gradescope",
+  "version": "0.0.0.1",
+  "description": "Accurately calculates and displays the overall course grade for a course on Gradescope",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://www.gradescope.com/courses/*"],
+      "js": ["scripts/content.js"]
+    }
+  ],
+  "icons": {
+    "16": "images/Scope16.png",
+    "32": "images/Scope32.png",
+    "48": "images/Scope48.png",
+    "128": "images/Scope128.png"
   }
 }
