@@ -12,3 +12,8 @@ To assign weights to assignments, add a new assignment type and specify the perc
 Calculating your course grade:
 
 To calculate your course grade, click the "Calculate Course Grade" button. The course grade will be calculated based on the weighted average of the grades for each assignment type. If two assignments are supposed to have different effects on the course grade, they should assigned different assignment types. This is because the amount of points that each assignment is worth is not taken into account, only the percentage. If two assignments have the same name, they will be treated as the one assignment.
+
+
+<img width="1212" alt="Screenshot 2024-11-16 at 1 21 10 AM" src="https://github.com/user-attachments/assets/5dd0fdb6-24de-4adb-b20e-56f4f38c86c8">
+
+<img width="744" alt="Screenshot 2024-11-16 at 1 21 41 AM" src="https://github.com/user-attachments/assets/c940da55-8ffd-4178-9a77-5f44cb4e91e5">
