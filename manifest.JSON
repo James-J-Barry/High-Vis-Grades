@@ -4,7 +4,6 @@
   "version": "0.0.0.1",
   "description": "Accurately calculates and displays the overall course grade for a course on Gradescope",
   "permissions": [
-    "activeTab",
     "scripting"
   ],
   "content_scripts": [
