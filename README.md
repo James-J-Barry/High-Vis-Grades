@@ -19,6 +19,10 @@ High-Vis Grades is NOT produced by or officially affiliated with Gradescope or T
 High-Vis Grades is a browser extension that calculates a student's course grade from their assignments on Gradescope. It allows users to edit weights for different categories of assignments, select assignment types, and calculate their overall course grade.
 
 ## Installation
+Download on the [chrome web store](https://chromewebstore.google.com/detail/High-Vis%20Grades%20for%20Gradescope/bbipgggnmodflnoenakmcoeiebgmffbf)
+
+To load & use locally:
+
 The extension is currently undergoing the process of being reveiwed for the chrome web store. In the meantime, install the extension using the following steps: 
 1. Clone the repository: `git clone https://github.com/James-J-Barry/High-Vis-Grades.git`
 2. Go to the directory: `cd High-Vis-Grades`
