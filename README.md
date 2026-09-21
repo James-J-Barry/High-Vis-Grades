@@ -4,7 +4,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/James-J-Barry/High-Vis-Grades)
 ![GitHub stars](https://img.shields.io/github/stars/James-J-Barry/High-Vis-Grades)
 
-By [James Barry](https://www.linkedin.com/in/james-barry-good-choice/)
+By [James Barry](https://www.linkedin.com/in/James-J-Barry/)
 
 ## Table of Contents
 - [Description](#description)
